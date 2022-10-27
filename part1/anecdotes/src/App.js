@@ -16,7 +16,7 @@ const App = () => {
   const randomAnecdote = () => {
     const chooseAnecdote = Math.floor(Math.random() * anecdotes.length);
     setSelected(chooseAnecdote);
-    console.log(randomAnecdote());
+   
   };
 
   return (
