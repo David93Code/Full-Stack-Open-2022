@@ -16,10 +16,6 @@ const App = () => {
   const randomAnecdote = () => {
     const chooseAnecdote = Math.floor(Math.random() * anecdotes.length);
     setSelected(chooseAnecdote);
-<<<<<<< HEAD
-=======
-   
->>>>>>> 82b09d1356f0f8d74c793d9e2ee2d804de19ddf8
   };
 
   return (
