@@ -4,20 +4,16 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  // const [allClicks, setAllClicks] = useState(0);
 
   const handleGoodClick = () => {
-    // setAllClicks(allClicks +1)
     setGood(good + 1);
   };
 
   const handleNeutralClick = () => {
-    // setAllClicks(allClicks +1)
     setNeutral(neutral + 1);
   };
 
   const handleBadClick = () => {
-    // setAllClicks(allClicks +1)
     setBad(bad + 1);
   };
 
@@ -43,18 +39,32 @@ const Statistics = (props) => {
   }
   return (
     <div>
-      <p>good {props.good}</p>
+      <StatisticLine text="good" value={props.good} />
+      <StatisticLine text="neutral" value={props.neutral} />
+      <StatisticLine text="bad" value={props.bad} />
+      <StatisticLine text="all" value={total} />
+      <StatisticLine text="average" value={average} />
+      <StatisticLine text="positive" value={positivePercentage + " %"} />
+      {/* <p>good {props.good}</p>
       <p>neutral {props.neutral}</p>
       <p>bad {props.bad}</p>
       <p>all {total}</p>
       <p>average {average}</p>
-      <p>positive {positivePercentage} %</p>
+      <p>positive {positivePercentage} %</p> */}
     </div>
   );
 };
 
 const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}>{text}</button>;
+};
+
+const StatisticLine = (props) => {
+  return (
+    <div>
+      {props.text} {props.value}
+    </div>
+  );
 };
 
 export default App;
