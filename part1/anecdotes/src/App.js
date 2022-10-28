@@ -12,17 +12,35 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  // make an array to set the points of the votes...in the useState we give an empty array where its length is the same as the
+  // anecdotes length; and as its values we set it to 0 (fill(0))
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0));
+  const [highestIndex, setHighestIndex] = useState(0);
 
   const randomAnecdote = () => {
     const chooseAnecdote = Math.floor(Math.random() * anecdotes.length);
     setSelected(chooseAnecdote);
   };
 
+  const storeVote = () => {
+    const copy = [...points];
+    copy[selected] += 1;
+    setHighestIndex(copy.indexOf(Math.max.apply(null, copy)));
+
+    setPoints(copy);
+  };
+  console.log(highestIndex);
   return (
     <div>
-      {anecdotes[selected]}
-      <br></br>
+      <h1>Anecdote of the day</h1>
+      <p> {anecdotes[selected]}</p>
+      <p> has {points[selected]} votes</p>
+
       <button onClick={randomAnecdote}>next anecdotes</button>
+      <button onClick={storeVote}>vote</button>
+      <h2>Anecdote with most votes</h2>
+      <p>{anecdotes[highestIndex]}</p>
+      <p> has {points[highestIndex]} votes</p>
     </div>
   );
 };
