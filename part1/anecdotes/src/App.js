@@ -18,13 +18,18 @@ const App = () => {
   const [highestIndex, setHighestIndex] = useState(0);
 
   const randomAnecdote = () => {
+    // Randomly chooses an anecdote among the array anecdotes
     const chooseAnecdote = Math.floor(Math.random() * anecdotes.length);
+    // Sets the index number
     setSelected(chooseAnecdote);
   };
 
   const storeVote = () => {
+    // creates an array copy of the array points
     const copy = [...points];
+    // Adds one value (vote) to the selected index
     copy[selected] += 1;
+    // Set which index of the copy array has the highest value (highest amount of votes)
     setHighestIndex(copy.indexOf(Math.max.apply(null, copy)));
 
     setPoints(copy);
