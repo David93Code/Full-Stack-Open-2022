@@ -4,15 +4,26 @@ const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
   const [newName, setNewName] = useState("");
 
+  // console.log(JSON.stringify(person1) === JSON.stringify(person2));
+
   const addPerson = (event) => {
     event.preventDefault();
-    const personObject = {
-      name: newName,
-    };
-    setPersons(persons.concat(personObject));
-    // this below is the function variant as the above comand (setPerson...)
-    // setPersons((current) => [...current, personObject]);
-    setNewName("");
+
+    if (
+      persons.filter((e) => e.name.toLowerCase() === newName.toLowerCase())
+        .length > 0
+    ) {
+      alert(`${newName} is already added to phonebook`);
+    } else {
+      const personObject = {
+        name: newName,
+      };
+
+      setPersons(persons.concat(personObject));
+      // this below is the function variant as the above comand (setPerson...)
+      // setPersons((current) => [...current, personObject]);
+      setNewName("");
+    }
   };
 
   const handleNewName = (event) => {
