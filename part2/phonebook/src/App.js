@@ -4,6 +4,9 @@ const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
   const [newName, setNewName] = useState("");
 
+  const [number, setNumber] = useState("040 - 1234567");
+  const [newNumber, setNewNumber] = useState();
+
   // console.log(JSON.stringify(person1) === JSON.stringify(person2));
 
   const addPerson = (event) => {
@@ -23,6 +26,13 @@ const App = () => {
       // this below is the function variant as the above comand (setPerson...)
       // setPersons((current) => [...current, personObject]);
       setNewName("");
+
+      const numberObject = {
+        number: newNumber,
+      };
+
+      setNumber(number.concat(numberObject));
+      setNewNumber();
     }
   };
 
@@ -30,6 +40,12 @@ const App = () => {
     console.log(event.target.value);
 
     setNewName(event.target.value);
+  };
+
+  const handleNewNumber = (event) => {
+    console.log(event.target.value);
+
+    setNewNumber(event.target.value);
   };
 
   console.log(persons);
@@ -42,16 +58,28 @@ const App = () => {
           name: <input value={newName} onChange={handleNewName} />
         </div>
         <div>
+          number <input value={newNumber} onChange={handleNewNumber} />
+        </div>
+        <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
-      {/* <div>debug: {newName}</div> */}
       <div>
         {persons.map((person) => (
-          <p key={person.name}>{person.name}</p>
+          <p key={person.name}>
+            {person.name} {number}
+          </p>
         ))}
+        {/* {number.map((num) => (
+          <p>{num}</p>
+        ))} */}
       </div>
+      {/* <div>
+        {number.map((num) => (
+          <p key={number}>{num}</p>
+        ))}
+      </div> */}
     </div>
   );
 };
