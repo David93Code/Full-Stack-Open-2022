@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas", number: "040 - 1234567" },
+  ]);
   const [newName, setNewName] = useState("");
 
-  const [number, setNumber] = useState("040 - 1234567");
-  const [newNumber, setNewNumber] = useState();
+  const [newNumber, setNewNumber] = useState("");
 
   // console.log(JSON.stringify(person1) === JSON.stringify(person2));
 
@@ -20,6 +21,7 @@ const App = () => {
     } else {
       const personObject = {
         name: newName,
+        number: newNumber,
       };
 
       setPersons(persons.concat(personObject));
@@ -27,12 +29,8 @@ const App = () => {
       // setPersons((current) => [...current, personObject]);
       setNewName("");
 
-      const numberObject = {
-        number: newNumber,
-      };
-
-      setNumber(number.concat(numberObject));
-      setNewNumber();
+      // setNumber(number.concat(newNumber));
+      setNewNumber("");
     }
   };
 
@@ -68,9 +66,10 @@ const App = () => {
       <div>
         {persons.map((person) => (
           <p key={person.name}>
-            {person.name} {number}
+            {person.name} {person.number}
           </p>
         ))}
+
         {/* {number.map((num) => (
           <p>{num}</p>
         ))} */}
