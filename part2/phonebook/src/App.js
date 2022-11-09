@@ -11,6 +11,9 @@ const App = () => {
 
   const [newNumber, setNewNumber] = useState("");
 
+  const [search, setSearch] = useState("");
+  console.log(search);
+
   const addPerson = (event) => {
     event.preventDefault();
 
@@ -26,8 +29,7 @@ const App = () => {
       };
 
       setPersons(persons.concat(personObject));
-      // this below is the function variant as the above comand (setPerson...)
-      // setPersons((current) => [...current, personObject]);
+
       setNewName("");
       setNewNumber("");
     }
@@ -45,26 +47,15 @@ const App = () => {
     setNewNumber(event.target.value);
   };
 
-  const filterNames = () => {
-    let filter = document.getElementById("filterInput");
-    let nameParagraph = document.getElementsByClassName("names");
-
-    for (let i = 0; i < persons.name.length; i++) {
-      if (persons.name[i].includes(filter.value.toLowerCase())) {
-        nameParagraph.style.display = "block";
-      } else {
-        nameParagraph.style.display = "none";
-      }
-    }
-  };
-
   console.log(persons);
 
   return (
     <div>
       <h2>Phonebook</h2>
+
       <div>
-        filter shown with <input onChange={filterNames} id={"filterInput"} />
+        filter shown with{" "}
+        <input onChange={(event) => setSearch(event.target.value)} />
       </div>
       <h2>add a new</h2>
       <form onSubmit={addPerson}>
@@ -80,11 +71,17 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <div>
-        {persons.map((person) => (
-          <p class={"names"} key={person.name}>
-            {person.name} {person.number}
-          </p>
-        ))}
+        {persons
+          .filter((person) => {
+            return search.toLowerCase() === ""
+              ? person
+              : person.name.toLowerCase().includes(search);
+          })
+          .map((person) => (
+            <p key={person.name}>
+              {person.name} {person.number}
+            </p>
+          ))}
       </div>
     </div>
   );
