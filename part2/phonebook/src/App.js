@@ -16,39 +16,6 @@ const App = () => {
   const [search, setSearch] = useState("");
   console.log(search);
 
-  const addPerson = (event) => {
-    event.preventDefault();
-
-    if (
-      persons.filter((e) => e.name.toLowerCase() === newName.toLowerCase())
-        .length > 0
-    ) {
-      alert(`${newName} is already added to phonebook`);
-    } else {
-      const personObject = {
-        name: newName,
-        number: newNumber,
-      };
-
-      setPersons(persons.concat(personObject));
-
-      setNewName("");
-      setNewNumber("");
-    }
-  };
-
-  const handleNewName = (event) => {
-    console.log(event.target.value);
-
-    setNewName(event.target.value);
-  };
-
-  const handleNewNumber = (event) => {
-    console.log(event.target.value);
-
-    setNewNumber(event.target.value);
-  };
-
   console.log(persons);
 
   return (
@@ -57,11 +24,11 @@ const App = () => {
       <Filter setSearch={setSearch} />
       <h2>add a new</h2>
       <PersonForm
-        addPerson={addPerson}
         newName={newName}
-        handleNewName={handleNewName}
         newNumber={newNumber}
-        handleNewNumber={handleNewNumber}
+        setPersons={setPersons}
+        setNewName={setNewName}
+        setNewNumber={setNewNumber}
       />
       <h2>Numbers</h2>
       <Persons persons={persons} search={search} />
