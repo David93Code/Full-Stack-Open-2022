@@ -24,6 +24,7 @@ const App = () => {
       <Filter setSearch={setSearch} />
       <h2>add a new</h2>
       <PersonForm
+        persons={persons}
         newName={newName}
         newNumber={newNumber}
         setPersons={setPersons}
