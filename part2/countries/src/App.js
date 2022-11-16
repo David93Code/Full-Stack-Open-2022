@@ -38,6 +38,7 @@ const App = () => {
         console.log(countrySearch)
         console.log(country)
 
+     
     if (search.toLowerCase() === "") {
       return <p>make a search</p>
    } else if(countrySearch > 10){
@@ -45,14 +46,14 @@ const App = () => {
    
       } else if (countrySearch === 1) {
         return (
-          country
+          country 
         )
         
     } else {
         return countries.filter((country) => {
           return country.name.common.toLowerCase().includes(search.toLowerCase())}).map((country) => (
             <p key={country.name.common}>
-              {country.name.common}
+              {country.name.common} <button onClick={() => setSearch(country.name.common)}>show</button>
             </p>
           ))
       }
@@ -63,9 +64,9 @@ const App = () => {
 
    return (
      <div>
-       <SearchBar setSearch={setSearch}/>
+       <SearchBar search={search} setSearch={setSearch}/>
        <div>
-       {filter()}
+       {filter()} 
   
        </div>
      </div>
