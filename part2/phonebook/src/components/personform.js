@@ -1,3 +1,6 @@
+import nameService from '../services/names'
+
+
 const PersonForm = (props) => {
   const addPerson = (event) => {
     event.preventDefault();
@@ -14,11 +17,17 @@ const PersonForm = (props) => {
         number: props.newNumber,
       };
 
-      props.setPersons(props.persons.concat(personObject));
+    
 
+      nameService.create(personObject).then(initialPersons => {
+        props.setPersons(props.persons.concat(initialPersons))
+      })
       props.setNewName("");
       props.setNewNumber("");
     }
+
+
+  
   };
 
   const handleNewName = (event) => {
@@ -32,6 +41,9 @@ const PersonForm = (props) => {
 
     props.setNewNumber(event.target.value);
   };
+
+  
+
   return (
     <form onSubmit={addPerson}>
       <div>

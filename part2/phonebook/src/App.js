@@ -3,6 +3,7 @@ import PersonForm from "./components/personform";
 import Persons from "./components/persons";
 import Filter from "./components/filter";
 import axios from "axios";
+import nameService from './services/names'
 
 
 const App = () => {
@@ -15,16 +16,19 @@ const App = () => {
 
   console.log(persons);
 
-  const hook = () => {
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
-      console.log('promise fulfilled');
-      setPersons(response.data)
-    })
-  }
 
-  useEffect(hook, []);
+
+  useEffect(() => {
+    nameService
+    .getAll()
+    .then(initialPersons => {
+      setPersons(initialPersons)
+    })
+  }, [])
+
+
+
+
 
   return (
     <div>
