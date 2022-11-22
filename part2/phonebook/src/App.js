@@ -4,6 +4,7 @@ import Persons from "./components/persons";
 import Filter from "./components/filter";
 import axios from "axios";
 import nameService from './services/names'
+import Buttons from "./components/buttons";
 
 
 const App = () => {
@@ -43,8 +44,10 @@ const App = () => {
         setNewName={setNewName}
         setNewNumber={setNewNumber}
       />
+      
       <h2>Numbers</h2>
-      <Persons persons={persons} search={search} />
+      <Persons persons={persons} search={search} setPersons={setPersons}/>
+   
     </div>
   );
 };
