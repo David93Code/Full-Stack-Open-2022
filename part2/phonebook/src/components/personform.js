@@ -8,16 +8,17 @@ const PersonForm = (props) => {
     if (
       props.persons.filter(
         (e) => e.name.toLowerCase() === props.newName.toLowerCase()
-      ).length > 0
+      ).length > 0 && window.confirm(`${props.newName} is already added to phonebook, replace the old umber with a new one?`)
     ) {
-      alert(`${props.newName} is already added to phonebook`);
+      // alert(`${props.newName} is already added to phonebook`);
+      nameService.changeNumber(props.id).then(() => {
+        props.setNewNumber(event.target.value)
+      })
     } else {
       const personObject = {
         name: props.newName,
         number: props.newNumber,
       };
-
-    
 
       nameService.create(personObject).then(initialPersons => {
         props.setPersons(props.persons.concat(initialPersons))
@@ -25,10 +26,8 @@ const PersonForm = (props) => {
       props.setNewName("");
       props.setNewNumber("");
     }
-
-
-  
   };
+
 
   const handleNewName = (event) => {
     console.log(event.target.value);
