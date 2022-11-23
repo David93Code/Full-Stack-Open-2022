@@ -4,19 +4,44 @@ import nameService from '../services/names'
 const PersonForm = (props) => {
   const addPerson = (event) => {
     event.preventDefault();
+    if (props.newName.trim().length === 0 && props.newNumber.trim().length === 0) {
+      alert('Enter a Name and a Number')
+      return
+    }
+    if (props.newName.trim().length === 0 ) {
+      alert('Enter a Name')
+      return
+    } else if (props.newNumber.trim().length === 0) {
+      alert('Enter a number')
+      return
+    } 
+
 
     if (
       props.persons.filter(
-        (e) => e.name.toLowerCase() === props.newName.toLowerCase()
-      ).length > 0 && window.confirm(`${props.newName} is already added to phonebook, replace the old umber with a new one?`)
+        (person) => person.name.toLowerCase() === props.newName.toLowerCase().trim()
+      ).length > 0 
     ) {
       // alert(`${props.newName} is already added to phonebook`);
-      nameService.changeNumber(props.id).then(() => {
-        props.setNewNumber(event.target.value)
-      })
+     
+      if ( window.confirm(`${props.newName.trim()} is already added to phonebook, replace the old umber with a new one?`)) {
+        
+        const foundPerson = props.persons.find(person => person.name.toLowerCase() === props.newName.toLowerCase().trim())
+        const changedPerson= { ...foundPerson, number: props.newNumber }
+        
+
+        nameService.changeNumber(changedPerson).then( response => {
+          props.setPersons(props.persons.map(person => person.id !== foundPerson.id ? person : response))
+        
+        })
+      } else {
+        return
+      }
+     
     } else {
+ 
       const personObject = {
-        name: props.newName,
+        name: props.newName.trim(),
         number: props.newNumber,
       };
 
