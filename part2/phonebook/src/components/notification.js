@@ -3,6 +3,8 @@ const Notification = ({ message }) => {
     return null;
   }
 
+ 
+
   return <div className="notification">{message}</div>;
 };
 

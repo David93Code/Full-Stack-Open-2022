@@ -6,7 +6,7 @@ import axios from "axios";
 import nameService from "./services/names";
 import Buttons from "./components/buttons";
 import Notification from "./components/notification";
-import './index.css';
+import Error from "./components/Error";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -15,7 +15,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [search, setSearch] = useState("");
 
-  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationMessage, setNotificationMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null)
 
   console.log(search);
 
@@ -27,10 +28,13 @@ const App = () => {
     });
   }, []);
 
+  console.log(errorMessage);
+
   return (
     <div>
       <h2>Phonebook</h2>
       <Notification message={notificationMessage} />
+      <Error message={errorMessage}/>
       <Filter setSearch={setSearch} />
       <h2>add a new</h2>
       <PersonForm
@@ -41,6 +45,7 @@ const App = () => {
         setNewName={setNewName}
         setNewNumber={setNewNumber}
         setNotificationMessage={setNotificationMessage}
+        setErrorMessage={setErrorMessage}
       />
 
       <h2>Numbers</h2>

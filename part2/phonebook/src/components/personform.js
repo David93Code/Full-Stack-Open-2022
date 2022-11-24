@@ -1,5 +1,5 @@
 import nameService from '../services/names'
-
+import Notification from './notification';
 
 const PersonForm = (props) => {
   const addPerson = (event) => {
@@ -37,6 +37,14 @@ const PersonForm = (props) => {
         setTimeout(() => {
           props.setNotificationMessage(null)
         }, 5000)})
+        .catch(error => {
+          props.setErrorMessage(
+            `Information of '${foundPerson.name}' has already been removed from server`
+          )
+          setTimeout(() => {
+            props.setErrorMessage(null)
+          }, 5000)
+          })
       } else {
         return
       }
@@ -57,6 +65,8 @@ const PersonForm = (props) => {
       props.setNewName("");
       props.setNewNumber("");
     }
+
+  
   };
 
 
