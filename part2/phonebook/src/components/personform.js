@@ -33,7 +33,10 @@ const PersonForm = (props) => {
         nameService.changeNumber(changedPerson).then( response => {
           props.setPersons(props.persons.map(person => person.id !== foundPerson.id ? person : response))
         
-        })
+        }).then(() => {props.setNotificationMessage(`Changed ${props.newName}'s number`)
+        setTimeout(() => {
+          props.setNotificationMessage(null)
+        }, 5000)})
       } else {
         return
       }
@@ -47,7 +50,10 @@ const PersonForm = (props) => {
 
       nameService.create(personObject).then(initialPersons => {
         props.setPersons(props.persons.concat(initialPersons))
-      })
+      }).then(() => {props.setNotificationMessage(`Added ${props.newName}`)
+      setTimeout(() => {
+        props.setNotificationMessage(null)
+      }, 5000)})
       props.setNewName("");
       props.setNewNumber("");
     }

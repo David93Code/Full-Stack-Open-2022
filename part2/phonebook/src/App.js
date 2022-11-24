@@ -6,6 +6,7 @@ import axios from "axios";
 import nameService from "./services/names";
 import Buttons from "./components/buttons";
 import Notification from "./components/notification";
+import './index.css';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -15,6 +16,7 @@ const App = () => {
   const [search, setSearch] = useState("");
 
   const [notificationMessage, setNotificationMessage] = useState("");
+
   console.log(search);
 
   console.log(persons);
@@ -38,6 +40,7 @@ const App = () => {
         setPersons={setPersons}
         setNewName={setNewName}
         setNewNumber={setNewNumber}
+        setNotificationMessage={setNotificationMessage}
       />
 
       <h2>Numbers</h2>
